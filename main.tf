@@ -75,7 +75,7 @@ resource "aws_instance" "ipadd" {
   monitoring = true
   ebs_optimized = true
   key_name = local.key_name
-  security_group_ids = [aws_security_group.acl.id]
+  vpc_security_group_ids = [aws_security_group.acl.id]
   user_data = <<EOF
 #cloud-config
 write_files:
