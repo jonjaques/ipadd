@@ -14,12 +14,19 @@ terraform {
       source = "hashicorp/aws"
       version = "3.13.0"
     }
+    
+    tls = {
+      source = "hashicorp/tls"
+      version = "3.0.0"
+    }
   }
 }
 
 provider "aws" {
   region = var.region
 }
+
+provider "tls" {}
 
 resource "tls_private_key" "deployer" {
   algorithm   = "ECDSA"
