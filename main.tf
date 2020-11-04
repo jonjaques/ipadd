@@ -65,6 +65,8 @@ resource "aws_security_group" "acl" {
   tags = {
     Name = "${var.name}-acl"
   }
+  
+  depends_on = [aws_key_pair.deployer]
 }
 
 resource "aws_instance" "ipadd" {
