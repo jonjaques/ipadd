@@ -1,4 +1,4 @@
-variable region { region = "us-east-2" }
+variable region { default = "us-east-2" }
 variable vpc_id {}
 variable subnet_id {}
 variable allowed_cidrs {}
