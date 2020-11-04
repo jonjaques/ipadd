@@ -39,7 +39,6 @@ resource "aws_instance" "ipadd" {
   ami           = var.ami_id
   instance_type = var.instance_type
   associate_public_ip_address = true
-  vpc_id = var.vpc_id
   subnet_id = var.subnet_id
   monitoring = true
   ebs_optimized = true
