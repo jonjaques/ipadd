@@ -29,8 +29,8 @@ provider "aws" {
 provider "tls" {}
 
 resource "tls_private_key" "deployer" {
-  algorithm   = "ECDSA"
-  ecdsa_curve = "P384"
+  algorithm = "RSA"
+  rsa_bits  = 4096
 }
 
 locals {
