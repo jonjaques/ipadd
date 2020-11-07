@@ -36,7 +36,7 @@ output "key_pem" {
 }
 
 output "save_key" {
-  value = "rm -f ~/.ssh/ipadd.pem && echo \"${jsonencode(local.key_contents)}\" > ~/.ssh/ipadd.pem && chmod 400 ~/.ssh/ipadd.pem"
+  value = "rm -f ~/.ssh/ipadd.pem && echo ${jsonencode(local.key_contents)} > ~/.ssh/ipadd.pem && chmod 400 ~/.ssh/ipadd.pem"
 }
 
 output "ssh_access" {
