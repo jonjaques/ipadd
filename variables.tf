@@ -4,10 +4,16 @@ variable subnet_id {}
 variable allowed_cidrs {}
 variable name {}
 
+variable route53_zone_id {}
+# Ubuntu
+# https://cloud-images.ubuntu.com/locator/ec2/
+# 20.04LTS x86_64 ebs
+variable ami_id { default = "ami-0a91cd140a1fc148a" }
+
 # Arch Linux
 # https://www.uplinklabs.net/projects/arch-linux-on-ec2/
 # LTS x86_64 ebs
-variable ami_id { default = "ami-043b666ec218ceb75" }
+# variable ami_id { default = "ami-043b666ec218ceb75" }
 
 # Amazon Linux
 # variable ami_id { default = "ami-03657b56516ab7912" }
@@ -29,5 +35,5 @@ output "key_pem" {
 }
 
 output "ssh_access" {
-  value = "ssh -i ~/.ssh/ipadd.pem arch@${aws_instance.ipadd.public_ip}"
+  value = "ssh -i ~/.ssh/ipadd.pem ubuntu@${aws_instance.ipadd.public_ip}"
 }

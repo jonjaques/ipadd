@@ -21,6 +21,14 @@ resource "aws_security_group" "acl" {
     cidr_blocks = var.allowed_cidrs
   }
 
+  ingress {
+    description = "HTTP from allowed_cidrs"
+    from_port   = 1337
+    to_port     = 1337
+    protocol    = "tcp"
+    cidr_blocks = var.allowed_cidrs
+  }
+
   egress {
     from_port   = 0
     to_port     = 0

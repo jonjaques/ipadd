@@ -11,14 +11,19 @@ terraform {
       source  = "hashicorp/tls"
       version = "3.0.0"
     }
-  }
 
-  backend "remote" {
-    hostname     = "app.terraform.io"
-    organization = "jaquesco"
-
-    workspaces {
-      name = "ipadd"
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.0"
     }
   }
+
+  # backend "remote" {
+  #   hostname     = "app.terraform.io"
+  #   organization = "jaquesco"
+
+  #   workspaces {
+  #     name = "ipadd"
+  #   }
+  # }
 }
