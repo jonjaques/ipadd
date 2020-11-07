@@ -1,0 +1,3 @@
+#cloud-config
+runcmd:
+  - echo "starting up... $(date)" > started
