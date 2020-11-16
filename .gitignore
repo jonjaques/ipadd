@@ -116,3 +116,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,linux,windows,terraform
+node_modules
+*.tfvars
+*.tfplan
+&.tfplan.backup

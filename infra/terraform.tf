@@ -18,12 +18,12 @@ terraform {
     }
   }
 
-  backend "remote" {
-    hostname     = "app.terraform.io"
-    organization = "jaquesco"
+  # backend "remote" {
+  #   hostname     = "app.terraform.io"
+  #   organization = "jaquesco"
 
-    workspaces {
-      name = "ipadd"
-    }
-  }
+  #   workspaces {
+  #     name = "ipadd"
+  #   }
+  # }
 }
