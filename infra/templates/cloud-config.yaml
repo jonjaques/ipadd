@@ -9,6 +9,7 @@ packages:
   - docker
   - docker-compose
 runcmd:
+  - sleep 30
   - systemctl enable --now docker
   - chown -R ubuntu:ubuntu /home/ubuntu
   - curl -fsSL https://code-server.dev/install.sh | su ubuntu

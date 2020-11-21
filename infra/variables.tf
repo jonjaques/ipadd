@@ -1,8 +1,10 @@
 variable region { default = "us-east-2" }
 variable vpc_id {}
 variable subnet_id {}
+variable lb_subnet_ids {}
 variable allowed_cidrs {}
 variable name {}
+variable route53_wildcard_domain {}
 
 variable route53_zone_id {}
 # Ubuntu
@@ -41,4 +43,12 @@ output "save_key" {
 
 output "ssh_access" {
   value = "ssh -i ~/.ssh/ipadd.pem ubuntu@${aws_instance.ipadd.public_ip}"
+}
+
+output "code_pw" {
+  value = random_password.user_pass.result
+}
+
+output "domain_name" {
+  value = local.domain_name
 }

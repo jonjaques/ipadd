@@ -1,6 +1,6 @@
 resource "random_password" "user_pass" {
   length  = 20
-  special = true
+  special = false
 }
 
 resource "aws_instance" "ipadd" {

@@ -1,20 +1,23 @@
 {
   "name": "ipadd",
   "version": "1.0.0",
-  "description": "",
+  "description": "Helper utilities for cloud dev environment",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "postinstall": "npm run infra:init",
     "infra:init": "terraform init infra",
     "infra:plan": "terraform plan -out=terraform.tfplan infra",
-    "infra:apply": "terraform apply terraform.tfplan"
+    "infra:apply": "terraform apply terraform.tfplan",
+    "infra:go": "run-s infra:plan infra:apply",
+    "infra:fmt": "terraform fmt -recursive"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonjaques/ipadd.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Jon Jaques <jaquers@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jonjaques/ipadd/issues"
   },
