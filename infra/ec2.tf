@@ -1,10 +1,8 @@
 locals {
   user_data = templatefile("${path.module}/templates/cloud-config.yaml", {
     USER         = local.user
-    USER_PUB_KEY = jsonencode(tls_private_key.deployer.public_key_openssh)
-    SRC_DIR      = var.src_dir
-    DEST_DIR     = var.dest_dir
     USER_PASS    = random_password.user_pass.result
+    USER_PUB_KEY = jsonencode(tls_private_key.deployer.public_key_openssh)
   })
 }
 

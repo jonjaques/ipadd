@@ -7,10 +7,12 @@
   "scripts": {
     "postinstall": "npm run infra:init",
     "infra:init": "terraform init infra",
+    "infra:validate": "terraform validate infra",
     "infra:plan": "terraform plan -out=terraform.tfplan infra",
     "infra:apply": "terraform apply terraform.tfplan",
-    "infra:go": "run-s infra:plan infra:apply",
+    "infra:go": "run-s infra:test infra:plan infra:apply",
     "infra:fmt": "terraform fmt -recursive",
+    "infra:test": "run-s infra:validate infra:fmt",
     "infra:clean": "terraform destroy -auto-approve infra",
     "ssh": "./scripts/ssh.sh"
   },
