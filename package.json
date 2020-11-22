@@ -11,6 +11,7 @@
     "infra:apply": "terraform apply terraform.tfplan",
     "infra:go": "run-s infra:plan infra:apply",
     "infra:fmt": "terraform fmt -recursive",
+    "infra:clean": "terraform destroy -auto-approve infra",
     "ssh": "./scripts/ssh.sh"
   },
   "repository": {
