@@ -8,6 +8,11 @@ resource "aws_key_pair" "deployer" {
   public_key = tls_private_key.deployer.public_key_openssh
 }
 
+resource "github_user_ssh_key" "example" {
+  title = "ipadd-dev"
+  key   = tls_private_key.deployer.public_key_openssh
+}
+
 resource "aws_security_group" "acl" {
   name        = "${var.name}-acl"
   description = "ACL for ${var.name}"

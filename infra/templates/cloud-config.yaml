@@ -8,24 +8,24 @@ packages:
   - nano
   - docker
   - docker-compose
+users:
+  - name: ${USER}
+    groups: [wheel]
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    shell: /bin/bash
+    ssh-authorized-keys:
+      - ${USER_PUB_KEY}
 runcmd:
-  - sleep 30
+  - sleep 5
   - systemctl enable --now docker
-  - chown -R ubuntu:ubuntu /home/ubuntu
-  - curl -fsSL https://code-server.dev/install.sh | su ubuntu
-  - su ubuntu -c "sudo systemctl enable --now code-server@ubuntu"
+  - chown -R ${USER}:${USER} /home/${USER}
+  - curl -fsSL https://code-server.dev/install.sh | su ${USER}
+  - su ${USER} -c "sudo systemctl enable --now code-server@${USER}"
 write_files:
-  - path: /home/ubuntu/.config/code-server/config.yaml
-    owner: ubuntu:ubuntu
+  - path: /home/${USER}/.config/code-server/config.yaml
+    owner: ${USER}:${USER}
     content: |
       bind-addr: 0.0.0.0:1337
       auth: password
       password: ${USER_PASS}
       cert: false
-
-# users:
-#   - name: dev
-#     sudo: ALL=(ALL) NOPASSWD:ALL
-#     groups: sudo, docker
-#     ssh_authorized_keys:
-#       - ${USER_PUB_KEY}

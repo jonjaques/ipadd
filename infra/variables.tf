@@ -1,32 +1,39 @@
 variable region { default = "us-east-2" }
+
 variable vpc_id {}
-variable subnet_id {}
-variable lb_subnet_ids {}
+
+variable subnet_ids {}
+
 variable allowed_cidrs {}
+
 variable name {}
+
 variable route53_wildcard_domain {}
 
 variable route53_zone_id {}
-# Ubuntu
-# https://cloud-images.ubuntu.com/locator/ec2/
-# 20.04LTS x86_64 ebs
+
 variable ami_id { default = "ami-0a91cd140a1fc148a" }
 
-# Arch Linux
-# https://www.uplinklabs.net/projects/arch-linux-on-ec2/
-# LTS x86_64 ebs
-# variable ami_id { default = "ami-043b666ec218ceb75" }
-
-# Amazon Linux
-# variable ami_id { default = "ami-03657b56516ab7912" }
 variable instance_type { default = "t3.micro" }
 
 variable src_dir { default = "code" }
+
 variable dest_dir { default = "/home/coder" }
 
+variable github_token {}
+
+variable github_owner {}
+
 locals {
-  key_name     = "${var.name}-deployment"
-  key_contents = "${tls_private_key.deployer.private_key_pem}${tls_private_key.deployer.public_key_pem}"
+  user            = "coder"
+  instance_subnet = var.subnet_ids[0]
+  key_name        = "${var.name}-deployment"
+  key_contents    = "${tls_private_key.deployer.private_key_pem}${tls_private_key.deployer.public_key_pem}"
+}
+
+resource "random_password" "user_pass" {
+  length  = 20
+  special = false
 }
 
 output "public_ip" {
@@ -37,18 +44,14 @@ output "key_pem" {
   value = local.key_contents
 }
 
-output "save_key" {
-  value = "rm -f ~/.ssh/ipadd.pem && echo ${jsonencode(local.key_contents)} > ~/.ssh/ipadd.pem && chmod 400 ~/.ssh/ipadd.pem"
+output "hostname" {
+  value = local.domain_name
 }
 
-output "ssh_access" {
-  value = "ssh -i ~/.ssh/ipadd.pem ubuntu@${aws_instance.ipadd.public_ip}"
-}
-
-output "code_pw" {
+output "user_pw" {
   value = random_password.user_pass.result
 }
 
-output "domain_name" {
-  value = local.domain_name
+output "url" {
+  value = "https://${local.domain_name}"
 }

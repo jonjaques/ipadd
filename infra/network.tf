@@ -42,6 +42,11 @@ resource "aws_route53_record" "acm" {
   zone_id         = var.route53_zone_id
 }
 
+data "aws_subnet" "this" {
+  for_each = toset(var.subnet_ids)
+  id       = each.value
+}
+
 # resource "aws_eip" "ipadd" {
 # instance = aws_instance.ipadd.id
 # vpc      = true

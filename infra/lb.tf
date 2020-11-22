@@ -3,7 +3,7 @@ resource "aws_lb" "this" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.web.id]
-  subnets            = var.lb_subnet_ids
+  subnets            = var.subnet_ids
 }
 
 resource "aws_lb_listener" "this" {
@@ -17,16 +17,6 @@ resource "aws_lb_listener" "this" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.this.arn
   }
-
-  # default_action {
-  #   type = "fixed-response"
-
-  #   fixed_response {
-  #     content_type = "text/plain"
-  #     message_body = "Fixed response content"
-  #     status_code  = "200"
-  #   }
-  # }
 }
 
 resource "aws_lb_target_group" "this" {
